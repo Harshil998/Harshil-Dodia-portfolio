@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harshil Dodia - Mechatronics Engineer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --electric: #00ff88;
+            --electric-dim: #00cc6a;
+            --dark: #0a0e14;
+            --darker: #050508;
+            --slate: #1a1f2e;
+            --steel: #2d3548;
+            --fog: #8b92a8;
+            --white: #ffffff;
+            --grid: rgba(0, 255, 136, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Manrope', sans-serif;
+            background: var(--dark);
+            color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated grid background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(var(--grid) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        /* Glowing orb effect */
+        .glow-orb {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(0, 255, 136, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1;
+            animation: float 15s ease-in-out infinite;
+        }
+
+        .glow-orb-1 {
+            top: -200px;
+            right: -200px;
+        }
+
+        .glow-orb-2 {
+            bottom: -200px;
+            left: -200px;
+            animation-delay: -7s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Header */
+        header {
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--steel);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(10, 14, 20, 0.8);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .logo {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--electric);
+            letter-spacing: -0.05em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.85rem;
+        }
+
+        .nav-links a {
+            color: var(--fog);
+            text-decoration: none;
+            position: relative;
+            transition: color 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--electric);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--electric);
+        }
+
+        .nav-links a:hover::before {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 6rem 0 8rem;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 900px;
+        }
+
+        .hero-label {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--electric);
+            margin-bottom: 1rem;
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--electric);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 7vw, 5rem);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--white) 0%, var(--electric) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero .subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: var(--fog);
+            margin-bottom: 2.5rem;
+            font-weight: 400;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+            padding: 2rem;
+            background: var(--slate);
+            border: 1px solid var(--steel);
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 2.5rem;
+            color: var(--electric);
+            font-weight: 700;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--fog);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            text-decoration: none;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border: 2px solid;
+        }
+
+        .btn-primary {
+            background: var(--electric);
+            color: var(--dark);
+            border-color: var(--electric);
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--white);
+            transition: left 0.3s;
+            z-index: -1;
+        }
+
+        .btn-primary:hover::before {
+            left: 0;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--electric);
+            border-color: var(--electric);
+        }
+
+        .btn-secondary:hover {
+            background: var(--electric);
+            color: var(--dark);
+        }
+
+        /* Section Styling */
+        section {
+            padding: 5rem 0;
+            position: relative;
+        }
+
+        .section-header {
+            margin-bottom: 4rem;
+        }
+
+        .section-number {
+            font-family: 'IBM Plex Mono', monospace;
+            color: var(--electric);
+            font-size: 0.9rem;
+            display: block;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.2em;
+        }
+
+        .section-header h2 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--fog);
+            max-width: 600px;
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--slate);
+            border: 1px solid var(--steel);
+            padding: 2.5rem;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 0;
+            background: var(--electric);
+            transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .project-card:hover {
+            transform: translateX(10px);
+            border-color: var(--electric);
+        }
+
+        .project-card:hover::before {
+            height: 100%;
+        }
+
+        .project-type {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--electric);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+        }
+
+        .project-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+
+        .project-card p {
+            color: var(--fog);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-tag {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.7rem;
+            padding: 0.4rem 0.8rem;
+            background: var(--darker);
+            border: 1px solid var(--steel);
+            color: var(--fog);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Experience Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 3rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--electric) 0%, transparent 100%);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 4rem;
+            background: var(--slate);
+            border: 1px solid var(--steel);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            margin-left: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -3.5rem;
+            top: 2rem;
+            width: 14px;
+            height: 14px;
+            background: var(--electric);
+            border: 3px solid var(--dark);
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px var(--slate);
+        }
+
+        .timeline-date {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--electric);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .timeline-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-item .company {
+            color: var(--fog);
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .timeline-item ul {
+            padding-left: 1.5rem;
+            color: var(--fog);
+        }
+
+        .timeline-item li {
+            margin-bottom: 0.8rem;
+            line-height: 1.7;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background: var(--slate);
+            border: 1px solid var(--steel);
+            padding: 2rem;
+        }
+
+        .skill-category h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--electric);
+            font-family: 'IBM Plex Mono', monospace;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .skill-item {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75rem;
+            padding: 0.6rem 1rem;
+            background: var(--darker);
+            border: 1px solid var(--steel);
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .skill-item:hover {
+            border-color: var(--electric);
+            background: var(--electric);
+            color: var(--dark);
+            transform: translateY(-2px);
+        }
+
+        /* Certifications */
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .cert-item {
+            background: var(--slate);
+            border: 1px solid var(--steel);
+            padding: 1.5rem;
+            border-left: 3px solid var(--electric);
+        }
+
+        .cert-item h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--white);
+        }
+
+        .cert-item .issuer {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--electric);
+            margin-bottom: 0.3rem;
+        }
+
+        .cert-item .date {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--fog);
+        }
+
+        /* Contact Form */
+        .contact-form {
+            max-width: 700px;
+            margin: 0 auto;
+            background: var(--slate);
+            border: 1px solid var(--steel);
+            padding: 3rem;
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.8rem;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--electric);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid var(--steel);
+            background: var(--darker);
+            color: var(--white);
+            font-family: 'Manrope', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--electric);
+        }
+
+        .form-group textarea {
+            min-height: 180px;
+            resize: vertical;
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 1.2rem 2rem;
+            background: var(--electric);
+            color: var(--dark);
+            border: 2px solid var(--electric);
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 600;
+        }
+
+        .form-submit:hover {
+            background: transparent;
+            color: var(--electric);
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 6rem;
+            padding: 3rem 0;
+            border-top: 1px solid var(--steel);
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            font-family: 'IBM Plex Mono', monospace;
+            color: var(--fog);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .social-link:hover {
+            color: var(--electric);
+        }
+
+        .copyright {
+            color: var(--fog);
+            font-size: 0.85rem;
+            font-family: 'IBM Plex Mono', monospace;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero {
+                padding: 3rem 0 5rem;
+            }
+
+            .timeline {
+                padding-left: 2rem;
+            }
+
+            .timeline-item {
+                margin-left: 1rem;
+            }
+
+            .timeline-item::before {
+                left: -2.5rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                text-align: center;
+            }
+
+            .contact-form {
+                padding: 2rem;
+            }
+        }
+
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--darker);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--steel);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--electric);
+        }
+    </style>
+</head>
+<body>
+    <div class="glow-orb glow-orb-1"></div>
+    <div class="glow-orb glow-orb-2"></div>
+
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">&lt;HARSHIL_DODIA /&gt;</div>
+                <ul class="nav-links">
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#experience">Experience</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <span class="hero-label">Mechatronics Engineer</span>
+                    <h1>Bridging Mechanical Design & Industrial Automation</h1>
+                    <p class="subtitle">Master's in Mechatronics • PLC Programming • Field-Oriented Control • SolidWorks CSWP</p>
+                    
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <span class="stat-number">2+</span>
+                            <span class="stat-label">Years Experience</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">M.Eng</span>
+                            <span class="stat-label">Mechatronics</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">4+</span>
+                            <span class="stat-label">Certifications</span>
+                        </div>
+                    </div>
+
+                    <div class="cta-buttons">
+                        <a href="#contact" class="btn btn-primary">Get in Touch</a>
+                        <a href="#projects" class="btn btn-secondary">View Projects</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">[01_PROJECTS]</span>
+                    <h2>Featured Work</h2>
+                    <p>Combining control theory, embedded systems, and mechanical design to solve real-world engineering challenges</p>
+                </div>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <span class="project-type">Master Thesis</span>
+                        <h3>Field-Oriented Control for BLDC Motor</h3>
+                        <p>Developed and implemented FOC algorithm in MATLAB/Simulink for precise torque and speed regulation. Real-time deployment on TI F280049C microcontroller with experimental validation showing improved efficiency and reduced torque ripple.</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">MATLAB/Simulink</span>
+                            <span class="tech-tag">Embedded C</span>
+                            <span class="tech-tag">TI F280049C</span>
+                            <span class="tech-tag">DRV8323RH</span>
+                            <span class="tech-tag">PWM Control</span>
+                            <span class="tech-tag">PI Controllers</span>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <span class="project-type">Master Project</span>
+                        <h3>Lock Management System for Additive Manufacturing</h3>
+                        <p>Designed a secure 24/7 locker access system for 3D printed parts using RAS locks. Developed web interface with admin panel for lock allocation and automated code generation integrated with Monday.com workflow.</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">PHP Laravel</span>
+                            <span class="tech-tag">MySQL</span>
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">Monday.com API</span>
+                            <span class="tech-tag">RAS Lock System</span>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <span class="project-type">Industrial Automation</span>
+                        <h3>Conveyor Belt Control System</h3>
+                        <p>Developed PLC logic in CtrlX (IEC 61131-3) for automated conveyor control. Integrated color and proximity sensors for part detection and implemented pneumatic sorting mechanism with comprehensive testing and documentation.</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">CtrlX</span>
+                            <span class="tech-tag">IEC 61131-3</span>
+                            <span class="tech-tag">Sensors</span>
+                            <span class="tech-tag">Pneumatics</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">[02_EXPERIENCE]</span>
+                    <h2>Professional Journey</h2>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">10/2021 - 03/2025</div>
+                        <h3>Master of Engineering in Mechatronics</h3>
+                        <p class="company">Technische Hochschule Rosenheim, Germany</p>
+                        <ul>
+                            <li>Specialized in model-based development and simulation of technical systems</li>
+                            <li>Advanced coursework in mechanical design and trajectory planning for machines</li>
+                            <li>Expertise in MATLAB/Simulink, TIA Portal, Python for control systems</li>
+                            <li>Final Grade: 2.4 (German grading system)</li>
+                        </ul>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">12/2019 - 09/2021</div>
+                        <h3>Design Engineer</h3>
+                        <p class="company">Suvidha Air Solutions Pvt. Ltd., Ahmedabad</p>
+                        <ul>
+                            <li>Developed technical concepts and designs for industrial fans considering mechanical and aerodynamic requirements</li>
+                            <li>Performed calculations, design optimization, and simulations for component efficiency, stability, and manufacturability</li>
+                            <li>Created 3D models, assemblies, and manufacturing drawings using SolidWorks & AutoCAD</li>
+                            <li>Collaborated with electrical and automation teams for electromechanical system integration</li>
+                        </ul>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">02/2018 - 10/2018</div>
+                        <h3>PLC Programming Intern</h3>
+                        <p class="company">Bosch Rexroth Group, Rajkot</p>
+                        <ul>
+                            <li>Developed PLC programs in CtrlX (IEC 61131-3) for conveyor belt control systems</li>
+                            <li>Integrated color and proximity sensors for automated part detection</li>
+                            <li>Implemented logic for pneumatic sorting mechanism control</li>
+                            <li>Conducted testing, troubleshooting, and technical documentation</li>
+                        </ul>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">05/2015 - 05/2019</div>
+                        <h3>Bachelor of Engineering in Mechanical Engineering</h3>
+                        <p class="company">Marwadi University, Rajkot, India</p>
+                        <ul>
+                            <li>Focused on mechanical engineering, automation, mechatronic systems, and rapid prototyping</li>
+                            <li>Gained proficiency in MATLAB, SolidWorks, and ANSYS</li>
+                            <li>Final Grade: 2.2 (German grading system)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">[03_SKILLS]</span>
+                    <h2>Technical Expertise</h2>
+                </div>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h3>Automation & PLC</h3>
+                        <div class="skill-list">
+                            <span class="skill-item">Siemens TIA Portal</span>
+                            <span class="skill-item">S7-1500</span>
+                            <span class="skill-item">CtrlX</span>
+                            <span class="skill-item">WinCC SCADA</span>
+                            <span class="skill-item">IEC 61131-3</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <h3>Engineering Software</h3>
+                        <div class="skill-list">
+                            <span class="skill-item">MATLAB/Simulink</span>
+                            <span class="skill-item">SolidWorks</span>
+                            <span class="skill-item">AutoCAD</span>
+                            <span class="skill-item">ANSYS</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <h3>Programming & Development</h3>
+                        <div class="skill-list">
+                            <span class="skill-item">Embedded C</span>
+                            <span class="skill-item">Python</span>
+                            <span class="skill-item">PHP Laravel</span>
+                            <span class="skill-item">MySQL</span>
+                            <span class="skill-item">React</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <h3>Control Systems</h3>
+                        <div class="skill-list">
+                            <span class="skill-item">FOC/Vector Control</span>
+                            <span class="skill-item">PI Controllers</span>
+                            <span class="skill-item">PWM Generation</span>
+                            <span class="skill-item">Motor Control</span>
+                            <span class="skill-item">Real-Time Systems</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-header" style="margin-top: 4rem;">
+                    <span class="section-number">[04_CERTIFICATIONS]</span>
+                    <h2>Professional Certifications</h2>
+                </div>
+                <div class="cert-grid">
+                    <div class="cert-item">
+                        <h4>Certified SolidWorks Professional (CSWP)</h4>
+                        <div class="issuer">Dassault Systèmes</div>
+                        <div class="date">February 2020</div>
+                    </div>
+                    <div class="cert-item">
+                        <h4>Industrial Automation</h4>
+                        <div class="issuer">Bosch Rexroth</div>
+                        <div class="date">October 2018</div>
+                    </div>
+                    <div class="cert-item">
+                        <h4>Advanced SCADA-PLC & Industrial IoT</h4>
+                        <div class="issuer">NIELIT Calicut</div>
+                        <div class="date">April 2025</div>
+                    </div>
+                    <div class="cert-item">
+                        <h4>Industrial Automation with PLC SCADA</h4>
+                        <div class="issuer">NIELIT Calicut</div>
+                        <div class="date">April 2025</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">[05_CONTACT]</span>
+                    <h2>Let's Connect</h2>
+                    <p>Interested in collaboration or have a project in mind? Drop me a message.</p>
+                </div>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="form-submit">Send Message</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/harshil-dodia" class="social-link" target="_blank">LinkedIn</a>
+                <a href="mailto:harshildodia2121@gmail.com" class="social-link">Email</a>
+                <a href="tel:+4917660371082" class="social-link">Phone</a>
+            </div>
+            <p class="copyright">© 2026 Harshil Dodia. Built with precision & passion for engineering.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Form submission handling
+        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData);
+            
+            // Here you would integrate with your backend or email service
+            console.log('Form submitted:', data);
+            
+            alert('Thank you for reaching out! I will get back to you soon.');
+            e.target.reset();
+        });
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.project-card, .timeline-item, .skill-category, .cert-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
